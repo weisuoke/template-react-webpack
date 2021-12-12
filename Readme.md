@@ -12,3 +12,4 @@
 - prettier
 - less
 - husky
+- tailwindcss@3

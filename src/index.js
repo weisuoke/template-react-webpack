@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./tailwindcss.css"
 import "./style.less"
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
     <div>
       React
       <div className="less">Feature: less</div>
+      <div className="bg-red-900 text-white">tailwind css demo</div>
     </div>
   );
 };
