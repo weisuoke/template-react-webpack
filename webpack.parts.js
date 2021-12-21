@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const APP_SOURCE = path.join(__dirname, "src");
@@ -11,8 +11,9 @@ exports.devServer = () => ({
     },
     compress: true,
     port: 9000,
+    historyApiFallback: true
   }
-})
+});
 
 exports.page = () => ({
   plugins: [
@@ -20,7 +21,7 @@ exports.page = () => ({
       template: path.join(__dirname, "public/index.html")
     })
   ]
-})
+});
 
 exports.loadJavaScript = () => ({
   module: {
@@ -37,7 +38,7 @@ exports.loadJavaScript = () => ({
       },
     ],
   },
-})
+});
 
 exports.loadCSS = () => ({
   module: {
@@ -48,7 +49,7 @@ exports.loadCSS = () => ({
       }
     ]
   }
-})
+});
 
 exports.loadLess = () => ({
   module: {
@@ -59,4 +60,4 @@ exports.loadLess = () => ({
       }
     ]
   }
-})
+});
