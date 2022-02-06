@@ -1,6 +1,11 @@
 const path = require("path")
+const webpack = require("webpack");
 const { merge } = require("webpack-merge")
 const parts = require("./webpack.parts")
+const paths = require("./config/paths")
+const getClientEnvironment  = require('./config/env')
+
+const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
 const commonConfig = merge([
   {
@@ -9,7 +14,10 @@ const commonConfig = merge([
       path: path.join(__dirname, "dist"),
       filename: "[name].js",
       publicPath: "/"
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin(env.stringified)
+    ]
   },
   parts.loadJavaScript(),
   parts.page(),
@@ -24,12 +32,13 @@ const developmentConfig = merge([
 ])
 
 const getConfig = (mode) => {
-  console.log(mode)
   switch (mode) {
     case "production":
       return merge(commonConfig, productionConfig, { mode });
     case "development":
       return merge(commonConfig, developmentConfig, { mode });
+    case "test":
+      return merge(commonConfig, developmentConfig, { mode: 'none' })
     default:
       throw new Error(`Trying to use an unknown mode, ${ mode }`);
   }
