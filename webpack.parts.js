@@ -28,7 +28,7 @@ exports.loadJavaScript = () => ({
     rules: [
       // Consider extracting include as a parameter
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         include: APP_SOURCE,
         loader: "esbuild-loader",
         options: {
@@ -56,8 +56,22 @@ exports.loadLess = () => ({
     rules: [
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"]
+        use: ["style-loader", "css-loader", "postcss-loader", "less-loader"]
       }
     ]
   }
 });
+
+exports.loadPic = () => ({
+  module: {
+    rules: [
+      {
+        test: /\.(jpg|png|bmp|gif)/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[hash][ext]'
+        }
+      }
+    ]
+  }
+})

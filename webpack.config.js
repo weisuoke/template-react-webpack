@@ -15,6 +15,11 @@ const commonConfig = merge([
       filename: "[name].js",
       publicPath: "/"
     },
+    resolve: {
+      alias: {
+        '@': path.resolve('src')
+      }
+    },
     plugins: [
       new webpack.DefinePlugin(env.stringified)
     ]
@@ -22,7 +27,8 @@ const commonConfig = merge([
   parts.loadJavaScript(),
   parts.page(),
   parts.loadLess(),
-  parts.loadCSS()
+  parts.loadCSS(),
+  parts.loadPic(),
 ])
 
 const productionConfig = merge([]);
